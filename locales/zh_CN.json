@@ -1,0 +1,71 @@
+{
+  "name": "屏幕截屏、录屏与多媒体 (Media & Capture)",
+  "description": "提供屏幕截图、滚动长截图、桌面录制为 GIF 动图、音频播放与录音、提示音以及工业摄像头采图功能",
+  "group": "多媒体",
+  "actions": {
+    "AudioPlay": {
+      "display_name": "播放音频 (AudioPlay)",
+      "description": "播放本地音频文件 (如 MP3、WAV 等)，支持调节音量和循环播放"
+    },
+    "AudioRecord": {
+      "display_name": "录音到文件 (AudioRecord)",
+      "description": "通过麦克风录制声音并保存为高质量音频文件"
+    },
+    "AudioStop": {
+      "display_name": "停止音频 (AudioStop)",
+      "description": "立即停止正在播放的背景音乐或提示音"
+    },
+    "CameraClose": {
+      "display_name": "关闭相机设备 (CameraClose)",
+      "description": "关闭已连接的 USB 工业相机或视频流摄像头"
+    },
+    "CameraOpen": {
+      "display_name": "打开相机设备 (CameraOpen)",
+      "description": "打开本地 USB 工业相机、摄像头或网络视频流"
+    },
+    "CaptureActiveWindow": {
+      "display_name": "截取当前活动窗口 (CaptureActiveWindow)",
+      "description": "截取当前最前方的活动软件窗口图像，可保存为文件或复制到剪贴板"
+    },
+    "CaptureRegion": {
+      "display_name": "截取指定区域 (CaptureRegion)",
+      "description": "截取屏幕上指定矩形区域的画面图像"
+    },
+    "CaptureScreen": {
+      "display_name": "截取屏幕 (CaptureScreen)",
+      "description": "截取整张电脑屏幕的画面图像，支持保存为文件或复制到剪贴板"
+    },
+    "CaptureScroll": {
+      "display_name": "滚动截取长图 (CaptureScroll)",
+      "description": "自动模拟向下滚动并无缝拼接成超长网页或聊天记录截图"
+    },
+    "CaptureWindow": {
+      "display_name": "截取指定窗口 (CaptureWindow)",
+      "description": "精准截取指定软件窗口的画面，即使窗口被遮挡也能清晰截取"
+    },
+    "MediaInfo": {
+      "display_name": "获取多媒体信息 (MediaInfo)",
+      "description": "快速查看音视频或图片文件的分辨率、播放时长和文件大小等属性"
+    },
+    "PlayRecord": {
+      "display_name": "回放录制 (PlayRecord)",
+      "description": "以指定速度回放之前录制好的鼠标轨迹与键盘击键动作"
+    },
+    "ScreenRecord": {
+      "display_name": "屏幕录制 (ScreenRecord)",
+      "description": "录制桌面屏幕或指定窗口的操作过程，一键导出为轻量级 GIF 动图"
+    },
+    "SystemBeep": {
+      "display_name": "蜂鸣提示音 (SystemBeep)",
+      "description": "发出系统提示音或警报蜂鸣声，用于流程完成或出错时的声音提醒"
+    },
+    "TextToSpeech": {
+      "display_name": "文本转语音 (TextToSpeech)",
+      "description": "使用系统自带语音将输入的文字大声朗读播报出来"
+    },
+    "VideoFrame": {
+      "display_name": "视频逐帧提取 (VideoFrame)",
+      "description": "从已打开的工业相机或视频文件中极速抓取当前最新的一帧清晰画面"
+    }
+  }
+}

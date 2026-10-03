@@ -1,0 +1,1207 @@
+{
+  "plugin_id": "xy_media",
+  "name": "屏幕截屏、录屏与多媒体 (Media & Capture)",
+  "version": "0.51.0",
+  "group": "Media",
+  "group_icon": "🎬",
+  "description": "提供屏幕截图、滚动长截图、桌面录制为 GIF 动图、音频播放与录音、提示音以及工业摄像头采图功能",
+  "actions": [
+    {
+      "tag": "AudioPlay",
+      "display_name": "播放音频 (AudioPlay)",
+      "icon": "▶️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "播放本地音频文件 (如 MP3、WAV 等)，支持调节音量和循环播放",
+      "keywords": [
+        "media",
+        "audio",
+        "play",
+        "sound",
+        "mp3",
+        "wav",
+        "播放音频",
+        "播放声音",
+        "提示音",
+        "背景音乐"
+      ],
+      "fields": [
+        {
+          "name": "file_path",
+          "display_name": "音频文件路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "C:/audio/notification.wav",
+            "C:/music/bgm.mp3"
+          ],
+          "description": "本地音频文件的绝对路径或相对路径"
+        },
+        {
+          "name": "volume",
+          "display_name": "音量 (0 - 100)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "80",
+          "presets": [
+            "50",
+            "80",
+            "100"
+          ],
+          "description": "音频播放音量大小 (0-100)"
+        },
+        {
+          "name": "repeat",
+          "display_name": "循环播放",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "是否开启循环重复播放 (1 为开启，0 为单次)"
+        },
+        {
+          "name": "wait",
+          "display_name": "等待播放完成",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "是否同步阻塞直到音频播放结束 (1 为阻塞，0 为后台播放)"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "AudioRecord",
+      "display_name": "录音到文件 (AudioRecord)",
+      "icon": "🎙️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "通过麦克风录制声音并保存为高质量音频文件",
+      "keywords": [
+        "media",
+        "audio",
+        "record",
+        "mic",
+        "wav",
+        "录音",
+        "麦克风录音",
+        "语音录入",
+        "音频录制"
+      ],
+      "fields": [
+        {
+          "name": "action",
+          "display_name": "录制模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "record_duration",
+          "presets": [
+            "record_duration",
+            "start",
+            "stop"
+          ],
+          "description": "录制动作模式：record_duration (指定时长录制)、start (后台启动录音)、stop (停止录音并保存)"
+        },
+        {
+          "name": "output_path",
+          "display_name": "WAV保存路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "recording.wav",
+          "presets": [
+            "recording.wav",
+            "C:/temp/voice.wav"
+          ],
+          "description": "录音文件保存的完整路径 (仅限 .wav 格式)"
+        },
+        {
+          "name": "duration",
+          "display_name": "录音时长(秒)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "5",
+          "presets": [
+            "3",
+            "5",
+            "10",
+            "30"
+          ],
+          "description": "在 record_duration 模式下的录音持续时间 (秒)"
+        },
+        {
+          "name": "sample_rate",
+          "display_name": "音频采样率(Hz)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "16000",
+          "presets": [
+            "8000",
+            "16000",
+            "44100"
+          ],
+          "description": "音频采样率频率 (语音识别建议 16000 Hz)"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "AudioStop",
+      "display_name": "停止音频 (AudioStop)",
+      "icon": "⏹️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "立即停止正在播放的背景音乐或提示音",
+      "keywords": [
+        "media",
+        "audio",
+        "stop",
+        "sound",
+        "停止音频",
+        "停止播放",
+        "关闭声音",
+        "静音"
+      ],
+      "fields": [
+        {
+          "name": "channel",
+          "display_name": "播放通道/别名",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "xy_audio",
+            "bgm"
+          ],
+          "description": "待停止的音频通道别名，留空停止默认通道"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "CameraClose",
+      "display_name": "关闭相机设备 (CameraClose)",
+      "icon": "📷",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "关闭已连接的 USB 工业相机或视频流摄像头",
+      "keywords": [
+        "camera",
+        "video",
+        "close",
+        "release",
+        "关闭相机",
+        "释放相机",
+        "摄像头关闭"
+      ],
+      "fields": [
+        {
+          "name": "camera",
+          "display_name": "相机句柄变量",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "{camera}",
+          "presets": [
+            "{camera}",
+            "{cam0}"
+          ],
+          "description": "需要关闭并释放的相机句柄变量引用"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "CameraOpen",
+      "display_name": "打开相机设备 (CameraOpen)",
+      "icon": "📹",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "打开本地 USB 工业相机、摄像头或网络视频流",
+      "keywords": [
+        "camera",
+        "video",
+        "usb",
+        "capture",
+        "打开相机",
+        "摄像头",
+        "工业相机",
+        "相机预览",
+        "视频流"
+      ],
+      "fields": [
+        {
+          "name": "device",
+          "display_name": "相机设备/视频源",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1",
+            "2",
+            "rtsp://192.168.1.100:554/live"
+          ],
+          "description": "摄像头设备索引编号 (0, 1, 2) 或 RTSP/HTTP 串流地址"
+        },
+        {
+          "name": "size",
+          "display_name": "期望分辨率 (W, H)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "1280, 720",
+            "1920, 1080",
+            "640, 480"
+          ],
+          "description": "相机采集期望的分辨率尺寸，留空保持硬件默认"
+        },
+        {
+          "name": "output_var",
+          "display_name": "相机句柄输出变量",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "camera",
+          "presets": [
+            "camera",
+            "cam0"
+          ],
+          "description": "保存打开后的相机句柄变量名，供后续 VideoFrame 采帧使用"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "CaptureActiveWindow",
+      "display_name": "截取当前活动窗口 (CaptureActiveWindow)",
+      "icon": "🪟",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "截取当前最前方的活动软件窗口图像，可保存为文件或复制到剪贴板",
+      "keywords": [
+        "media",
+        "capture",
+        "active_window",
+        "活动窗口",
+        "当前窗口",
+        "前台截图",
+        "焦点窗口",
+        "截屏"
+      ],
+      "fields": [
+        {
+          "name": "size",
+          "display_name": "裁剪尺寸 (w, h)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "800, 600",
+            "1280, 720"
+          ],
+          "description": "局部截取的宽高，留空截取整个窗口"
+        },
+        {
+          "name": "top_left",
+          "display_name": "左上角偏移 (x, y)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "0, 0",
+          "presets": [
+            "0, 0",
+            "10, 10",
+            "50, 50"
+          ],
+          "description": "相对于活动窗口客户区左上角的裁剪起始坐标"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "C:/temp/active_window.png"
+          ],
+          "description": "截图直接存盘路径，留空则返回内存 Image 对象"
+        },
+        {
+          "name": "to_clipboard",
+          "display_name": "复制到剪贴板",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "是否同步复制截图至系统剪贴板 (1为是，0为否)"
+        },
+        {
+          "name": "ocr_optimize",
+          "display_name": "OCR白底优化",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "是否自动将透明/半透明通道平铺为纯白背景以提升 OCR 识别率"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "CaptureRegion",
+      "display_name": "截取指定区域 (CaptureRegion)",
+      "icon": "✂️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "截取屏幕上指定矩形区域的画面图像",
+      "keywords": [
+        "media",
+        "capture",
+        "region",
+        "区域截图",
+        "矩形截屏",
+        "局部截图",
+        "坐标截屏",
+        "ROI截图"
+      ],
+      "fields": [
+        {
+          "name": "region",
+          "display_name": "区域坐标 (x, y, w, h)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "0, 0, 800, 600",
+          "presets": [
+            "0, 0, 800, 600",
+            "100, 100, 400, 300",
+            "200, 200, 1280, 720"
+          ],
+          "description": "屏幕绝对坐标选区范围 (x, y, 宽, 高)"
+        },
+        {
+          "name": "display_name",
+          "display_name": "显示器 (空为主屏幕)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "primary",
+            "0",
+            "1"
+          ],
+          "description": "多显示器环境下的目标显示器编号或名称"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "C:/temp/region.png"
+          ],
+          "description": "保存文件的绝对路径"
+        },
+        {
+          "name": "to_clipboard",
+          "display_name": "复制到剪贴板",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "是否复制到系统剪贴板"
+        },
+        {
+          "name": "ocr_optimize",
+          "display_name": "OCR白底优化",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "OCR白底透平优化"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "CaptureScreen",
+      "display_name": "截取屏幕 (CaptureScreen)",
+      "icon": "🖥️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "截取整张电脑屏幕的画面图像，支持保存为文件或复制到剪贴板",
+      "keywords": [
+        "media",
+        "capture",
+        "screen",
+        "screenshot",
+        "截屏",
+        "屏幕截图",
+        "全屏截图",
+        "多屏截图",
+        "桌面截屏"
+      ],
+      "fields": [
+        {
+          "name": "display_name",
+          "display_name": "显示器名称/编号",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "primary",
+            "0",
+            "1"
+          ],
+          "description": "目标屏幕，留空为默认主屏幕或虚拟跨屏全桌面"
+        },
+        {
+          "name": "size",
+          "display_name": "裁剪尺寸 (w, h)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "1920, 1080",
+            "1280, 720"
+          ],
+          "description": "局部截取的宽高"
+        },
+        {
+          "name": "top_left",
+          "display_name": "左上角偏移 (x, y)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "0, 0",
+          "presets": [
+            "0, 0",
+            "100, 100"
+          ],
+          "description": "起始坐标偏移"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "C:/temp/screenshot.png"
+          ],
+          "description": "保存文件路径"
+        },
+        {
+          "name": "to_clipboard",
+          "display_name": "复制到剪贴板",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "复制到系统剪贴板"
+        },
+        {
+          "name": "ocr_optimize",
+          "display_name": "OCR白底优化",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "透明通道白底铺平"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "CaptureScroll",
+      "display_name": "滚动截取长图 (CaptureScroll)",
+      "icon": "📜",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "自动模拟向下滚动并无缝拼接成超长网页或聊天记录截图",
+      "keywords": [
+        "media",
+        "capture",
+        "scroll",
+        "长截图",
+        "滚动截图",
+        "长图拼接",
+        "网页长截图",
+        "列表截图",
+        "滚动截屏"
+      ],
+      "fields": [
+        {
+          "name": "target_window",
+          "display_name": "目标窗口 (空为前台焦点)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "Chrome",
+            "Edge",
+            "Notepad"
+          ],
+          "description": "滚动的目标窗口标题或句柄"
+        },
+        {
+          "name": "scroll_direction",
+          "display_name": "滚动方向",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "down",
+          "presets": [
+            "down",
+            "up"
+          ],
+          "description": "滚轮滚动方向 (down/up)"
+        },
+        {
+          "name": "scroll_clicks",
+          "display_name": "单次滚轮步长",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "5",
+          "presets": [
+            "3",
+            "5",
+            "8",
+            "10"
+          ],
+          "description": "每次滚动步骤发送的滚轮刻度数"
+        },
+        {
+          "name": "max_pages",
+          "display_name": "最大滚动页数",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "5",
+          "presets": [
+            "3",
+            "5",
+            "10",
+            "15"
+          ],
+          "description": "最大滚动采样的图片页数"
+        },
+        {
+          "name": "delay_ms",
+          "display_name": "滚动间歇停顿(ms)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "400",
+          "presets": [
+            "300",
+            "400",
+            "600",
+            "1000"
+          ],
+          "description": "单次滚动后等待网页/界面重新渲染的沉降时间"
+        },
+        {
+          "name": "overlap_pct",
+          "display_name": "重叠比例(%)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "20",
+          "presets": [
+            "10",
+            "20",
+            "30"
+          ],
+          "description": "连续帧之间的缝合重叠预估比例"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "C:/temp/scroll_long.png"
+          ],
+          "description": "长截图存盘路径"
+        },
+        {
+          "name": "to_clipboard",
+          "display_name": "复制到剪贴板",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "复制到系统剪贴板"
+        },
+        {
+          "name": "ocr_optimize",
+          "display_name": "OCR白底优化",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "OCR优化"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "CaptureWindow",
+      "display_name": "截取指定窗口 (CaptureWindow)",
+      "icon": "🖼️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "精准截取指定软件窗口的画面，即使窗口被遮挡也能清晰截取",
+      "keywords": [
+        "media",
+        "capture",
+        "window",
+        "窗口截图",
+        "句柄截图",
+        "后台截图",
+        "应用截图",
+        "窗口截屏"
+      ],
+      "fields": [
+        {
+          "name": "window",
+          "display_name": "目标窗口句柄或标题",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "窗口句柄数值或标题模糊匹配关键字"
+        },
+        {
+          "name": "index",
+          "display_name": "窗口索引序号",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "匹配到多个同名窗口时的选择索引"
+        },
+        {
+          "name": "size",
+          "display_name": "裁剪尺寸 (w, h)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "窗口内裁剪宽高"
+        },
+        {
+          "name": "top_left",
+          "display_name": "左上角偏移 (x, y)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "0, 0",
+          "presets": [
+            "0, 0"
+          ],
+          "description": "窗口内局部坐标偏移"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "C:/temp/window.png"
+          ],
+          "description": "保存文件路径"
+        },
+        {
+          "name": "to_clipboard",
+          "display_name": "复制到剪贴板",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "复制到剪贴板"
+        },
+        {
+          "name": "ocr_optimize",
+          "display_name": "OCR白底优化",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "OCR白底优化"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "MediaInfo",
+      "display_name": "获取多媒体信息 (MediaInfo)",
+      "icon": "ℹ️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "快速查看音视频或图片文件的分辨率、播放时长和文件大小等属性",
+      "keywords": [
+        "media",
+        "info",
+        "probe",
+        "metadata",
+        "媒体信息",
+        "视频属性",
+        "音频属性",
+        "图片尺寸",
+        "时长"
+      ],
+      "fields": [
+        {
+          "name": "file_path",
+          "display_name": "多媒体文件路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "C:/images/sample.png",
+            "C:/video/clip.mp4",
+            "C:/audio/test.wav"
+          ],
+          "description": "待读取元数据的音视频或图像文件路径"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "PlayRecord",
+      "display_name": "回放录制 (PlayRecord)",
+      "icon": "🔁",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "以指定速度回放之前录制好的鼠标轨迹与键盘击键动作",
+      "keywords": [
+        "media",
+        "macro",
+        "replay",
+        "play_record",
+        "回放录制",
+        "键鼠回放",
+        "宏录制",
+        "步骤回放"
+      ],
+      "fields": [
+        {
+          "name": "name",
+          "display_name": "宏记录表名",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "在宏录制服务中持久化的事件清单表名"
+        },
+        {
+          "name": "radius",
+          "display_name": "随机抖动偏移(px)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "5",
+            "10",
+            "20"
+          ],
+          "description": "模拟真实人工操作的随机偏移像素半径"
+        },
+        {
+          "name": "speed",
+          "display_name": "回放速度倍率",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "1.0",
+          "presets": [
+            "1.0",
+            "1.5",
+            "2.0",
+            "3.0",
+            "5.0"
+          ],
+          "description": "时间间隔加速或减速倍率"
+        },
+        {
+          "name": "repeat",
+          "display_name": "循环次数",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "1",
+          "presets": [
+            "1",
+            "2",
+            "5",
+            "10"
+          ],
+          "description": "执行该操作序列的重复次数"
+        },
+        {
+          "name": "interval",
+          "display_name": "循环间隙(ms)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "100",
+            "500",
+            "1000"
+          ],
+          "description": "每次循环之间的暂停等待时长 (毫秒)"
+        }
+      ],
+      "output_type": "number"
+    },
+    {
+      "tag": "ScreenRecord",
+      "display_name": "屏幕录制 (ScreenRecord)",
+      "icon": "🔴",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "录制桌面屏幕或指定窗口的操作过程，一键导出为轻量级 GIF 动图",
+      "keywords": [
+        "media",
+        "record",
+        "screen_record",
+        "屏幕录制",
+        "录屏",
+        "GIF录制",
+        "动作录制",
+        "窗口录屏",
+        "审计录屏"
+      ],
+      "fields": [
+        {
+          "name": "action",
+          "display_name": "录制动作",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "record_duration",
+          "presets": [
+            "record_duration",
+            "start",
+            "stop"
+          ],
+          "description": "录制操作：record_duration (录制指定秒数)、start (后台启动录屏)、stop (停止录屏并导出)"
+        },
+        {
+          "name": "output_path",
+          "display_name": "输出路径 (.gif)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "record.gif",
+          "presets": [
+            "record.gif",
+            "C:/temp/audit_trace.gif"
+          ],
+          "description": "生成的 GIF 动图保存路径"
+        },
+        {
+          "name": "fps",
+          "display_name": "录制帧率 (FPS)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "10",
+          "presets": [
+            "5",
+            "10",
+            "15",
+            "20"
+          ],
+          "description": "录屏采样帧率 (建议 5-15 FPS 以降低文件体积)"
+        },
+        {
+          "name": "duration",
+          "display_name": "录制定时时长(秒)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "5",
+          "presets": [
+            "3",
+            "5",
+            "10",
+            "30"
+          ],
+          "description": "在 record_duration 模式下的录制时长"
+        },
+        {
+          "name": "target_window",
+          "display_name": "目标窗口 (空为全桌面)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "Chrome",
+            "Edge",
+            "Notepad"
+          ],
+          "description": "限定录制的特定窗口标题/句柄，留空录制全桌面"
+        },
+        {
+          "name": "scale",
+          "display_name": "分辨率缩放倍率",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0.5",
+          "presets": [
+            "0.5",
+            "0.75",
+            "1.0"
+          ],
+          "description": "采样分辨率等比例缩放系数 (0.1 - 1.0)"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "SystemBeep",
+      "display_name": "蜂鸣提示音 (SystemBeep)",
+      "icon": "🔊",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "发出系统提示音或警报蜂鸣声，用于流程完成或出错时的声音提醒",
+      "keywords": [
+        "media",
+        "beep",
+        "sound",
+        "alarm",
+        "蜂鸣",
+        "提示音",
+        "蜂鸣器",
+        "系统声音",
+        "警报声"
+      ],
+      "fields": [
+        {
+          "name": "beep_type",
+          "display_name": "提示音类型",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "tone",
+          "presets": [
+            "tone",
+            "info",
+            "warning",
+            "error",
+            "ok"
+          ],
+          "description": "提示音风格：tone (纯音调频率蜂鸣)、info (系统信息音)、warning (警告音)、error (错误音)、ok (完成音)"
+        },
+        {
+          "name": "frequency",
+          "display_name": "声音频率(Hz)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "750",
+          "presets": [
+            "500",
+            "750",
+            "1000",
+            "1500"
+          ],
+          "description": "当 beep_type 为 tone 时的发声声调频率 (Hz)"
+        },
+        {
+          "name": "duration_ms",
+          "display_name": "持续时间(毫秒)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "300",
+          "presets": [
+            "200",
+            "300",
+            "500",
+            "1000"
+          ],
+          "description": "蜂鸣声发声持续时间 (毫秒)"
+        }
+      ],
+      "output_type": "number"
+    },
+    {
+      "tag": "TextToSpeech",
+      "display_name": "文本转语音 (TextToSpeech)",
+      "icon": "🗣️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "使用系统自带语音将输入的文字大声朗读播报出来",
+      "keywords": [
+        "media",
+        "tts",
+        "speech",
+        "voice",
+        "朗读",
+        "文本转语音",
+        "语音播报",
+        "语音朗读",
+        "语音通知"
+      ],
+      "fields": [
+        {
+          "name": "text",
+          "display_name": "朗读文本内容",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "操作已完成",
+          "presets": [
+            "操作已完成",
+            "警告：检测到异常情况",
+            "任务执行完毕"
+          ],
+          "description": "需要语音播报的纯文本内容"
+        },
+        {
+          "name": "rate",
+          "display_name": "朗读语速 (-10 到 10)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "-2",
+            "0",
+            "2",
+            "5"
+          ],
+          "description": "发音语速快慢调节 (-10 到 10，0为正常)"
+        },
+        {
+          "name": "volume",
+          "display_name": "语音音量 (0 - 100)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "100",
+          "presets": [
+            "50",
+            "80",
+            "100"
+          ],
+          "description": "发音音量大小 (0 到 100)"
+        },
+        {
+          "name": "wait",
+          "display_name": "等待朗读完成",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "1",
+          "presets": [
+            "1",
+            "0"
+          ],
+          "description": "是否阻塞直到朗读声音结束 (1为阻塞等待，0为后台异步朗读)"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "VideoFrame",
+      "display_name": "视频逐帧提取 (VideoFrame)",
+      "icon": "🎞️",
+      "platforms": "All",
+      "requires_admin": false,
+      "description": "从已打开的工业相机或视频文件中极速抓取当前最新的一帧清晰画面",
+      "keywords": [
+        "media",
+        "video",
+        "frame",
+        "camera",
+        "extract",
+        "视频抽帧",
+        "相机拍照",
+        "相机采帧",
+        "视频帧捕获"
+      ],
+      "fields": [
+        {
+          "name": "camera",
+          "display_name": "相机变量/设备索引",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "{camera}",
+          "presets": [
+            "{camera}",
+            "0",
+            "1"
+          ],
+          "description": "由 CameraOpen 产生的相机句柄变量引用 (如 {camera}) 或直接设备索引"
+        },
+        {
+          "name": "output_path",
+          "display_name": "帧图像存盘路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "",
+            "C:/temp/frame.png"
+          ],
+          "description": "将提取的单帧直接保存为图片，留空返回 Image 内存实体"
+        },
+        {
+          "name": "to_clipboard",
+          "display_name": "复制到剪贴板",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "是否同步复制该帧至系统剪贴板 (1为是，0为否)"
+        }
+      ],
+      "output_type": "string"
+    }
+  ]
+}
