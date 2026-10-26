@@ -1,71 +1,59 @@
 {
-  "name": "屏幕截屏、录屏与多媒体 (Media & Capture)",
-  "description": "提供屏幕截图、滚动长截图、桌面录制为 GIF 动图、音频播放与录音、提示音以及工业摄像头采图功能",
-  "group": "미디어",
+  "name": "화면 캡처, 녹화 및 멀티미디어 (Media & Capture)",
+  "description": "화면 캡처, 스크롤 캡처, USB/RTSP 카메라, GIF/MP4 녹화, 2채널 오디오 믹싱, Candle 오프라인 Whisper ASR, TTS 및 모자이크 마스킹 멀티미디어 수트",
+  "group": "멀티미디어",
   "actions": {
-    "AudioPlay": {
-      "display_name": "오디오 재생 (AudioPlay)",
-      "description": "播放本地音频文件 (如 MP3、WAV 等)，支持调节音量和循环播放"
-    },
-    "AudioRecord": {
-      "display_name": "오디오 녹음 (AudioRecord)",
-      "description": "通过麦克风录制声音并保存为高质量音频文件"
-    },
-    "AudioStop": {
-      "display_name": "오디오 정지 (AudioStop)",
-      "description": "立即停止正在播放的背景音乐或提示音"
-    },
-    "CameraClose": {
-      "display_name": "카메라 닫기 (CameraClose)",
-      "description": "关闭已连接的 USB 工业相机或视频流摄像头"
-    },
-    "CameraOpen": {
-      "display_name": "카메라 열기 (CameraOpen)",
-      "description": "打开本地 USB 工业相机、摄像头或网络视频流"
-    },
-    "CaptureActiveWindow": {
-      "display_name": "활성 창 캡처 (CaptureActiveWindow)",
-      "description": "截取当前最前方的活动软件窗口图像，可保存为文件或复制到剪贴板"
-    },
-    "CaptureRegion": {
-      "display_name": "영역 캡처 (CaptureRegion)",
-      "description": "截取屏幕上指定矩形区域的画面图像"
-    },
-    "CaptureScreen": {
-      "display_name": "화면 캡처 (CaptureScreen)",
-      "description": "截取整张电脑屏幕的画面图像，支持保存为文件或复制到剪贴板"
+    "CaptureImage": {
+      "display_name": "범용 화면 캡처 (CaptureImage)",
+      "description": "전체 화면, 활성/지정 창, ROI 영역 캡처 및 OCR용 배경 최적화 기능 포함"
     },
     "CaptureScroll": {
       "display_name": "스크롤 캡처 (CaptureScroll)",
-      "description": "自动模拟向下滚动并无缝拼接成超长网页或聊天记录截图"
+      "description": "자동 스크롤하여 긴 웹페이지나 대화 내역을 원활하게 병합 캡처"
     },
-    "CaptureWindow": {
-      "display_name": "지정 창 캡처 (CaptureWindow)",
-      "description": "精准截取指定软件窗口的画面，即使窗口被遮挡也能清晰截取"
-    },
-    "MediaInfo": {
-      "display_name": "미디어 정보 (MediaInfo)",
-      "description": "快速查看音视频或图片文件的分辨率、播放时长和文件大小等属性"
-    },
-    "PlayRecord": {
-      "display_name": "매크로 재생 (PlayRecord)",
-      "description": "以指定速度回放之前录制好的鼠标轨迹与键盘击键动作"
+    "CameraCapture": {
+      "display_name": "카메라 및 스트림 캡처 (CameraCapture)",
+      "description": "USB 카메라 및 RTSP 스트림의 단일 촬영, 연속 캡처 및 종료 제어"
     },
     "ScreenRecord": {
-      "display_name": "화면 녹화 (ScreenRecord)",
-      "description": "录制桌面屏幕或指定窗口的操作过程，一键导出为轻量级 GIF 动图"
+      "display_name": "화면 녹화 GIF (ScreenRecord)",
+      "description": "화면 및 창 동작을 녹화하여 가벼운 GIF 애니메이션으로 내보내기"
     },
-    "SystemBeep": {
-      "display_name": "시스템 경고음 (SystemBeep)",
-      "description": "发出系统提示音或警报蜂鸣声，用于流程完成或出错时的声音提醒"
+    "VideoRecord": {
+      "display_name": "고화질 MP4 화면 녹화 (VideoRecord)",
+      "description": "시스템+마이크 믹싱 및 30초 충돌 복구 링 버퍼 내보내기를 지원하는 고화질 MP4 동영상 녹화"
+    },
+    "AudioPlayer": {
+      "display_name": "오디오 재생 및 제어 (AudioPlayer)",
+      "description": "로컬 오디오 재생, 볼륨 조절, 반복, 정지 및 시스템 비프음 발생"
+    },
+    "AudioRecord": {
+      "display_name": "마이크 녹음 (AudioRecord)",
+      "description": "마이크 입력을 캡처하여 고품질 WAV 오디오 파일로 저장"
+    },
+    "AudioCaptureSystem": {
+      "display_name": "시스템 오디오 내부 녹음 (AudioCaptureSystem)",
+      "description": "PC에서 재생되는 모든 소리 (회의, 플레이어, 통화)를 무손실 WAV로 녹음"
     },
     "TextToSpeech": {
-      "display_name": "음성 합성 (TextToSpeech)",
-      "description": "使用系统自带语音将输入的文字大声朗读播报出来"
+      "display_name": "텍스트 음성 변환 (TextToSpeech)",
+      "description": "오프라인 시스템 음성으로 입력된 텍스트를 소리 내어 읽기"
     },
-    "VideoFrame": {
-      "display_name": "비디오 프레임 추출 (VideoFrame)",
-      "description": "从已打开的工业相机或视频文件中极速抓取当前最新的一帧清晰画面"
+    "SpeechToText": {
+      "display_name": "음성 텍스트 변환 ASR (SpeechToText)",
+      "description": "Hugging Face Candle 순수 Rust 오프라인 ASR 엔진으로 설정의 Whisper 모델을 호출하여 텍스트 변환"
+    },
+    "AudioExtract": {
+      "display_name": "오디오 추출 (AudioExtract)",
+      "description": "재인코딩 없이 비디오에서 오디오 트랙을 밀리초 단위로 추출 (MP4 -> MP3/WAV/M4A)"
+    },
+    "MediaWatermark": {
+      "display_name": "워터마크 및 모자이크 처리 (MediaWatermark)",
+      "description": "동적 텍스트 워터마크 추가 또는 민감한 영역에 대한 픽셀 모자이크 및 가우시안 블러 처리"
+    },
+    "MediaInfo": {
+      "display_name": "미디어 정보 조회 (MediaInfo)",
+      "description": "오디오/비디오 및 이미지의 해상도, 재생 시간, 포맷 등 메타데이터 조회"
     }
   }
 }

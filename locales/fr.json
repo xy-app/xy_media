@@ -1,71 +1,59 @@
 {
-  "name": "屏幕截屏、录屏与多媒体 (Media & Capture)",
-  "description": "提供屏幕截图、滚动长截图、桌面录制为 GIF 动图、音频播放与录音、提示音以及工业摄像头采图功能",
-  "group": "Médias",
+  "name": "Capture d'écran, enregistrement & média (Media & Capture)",
+  "description": "Suite multimédia industrielle pour captures d'écran, captures défilantes, caméras USB/RTSP, enregistrement GIF/MP4, mixage audio 2 canaux, ASR Whisper Candle hors ligne, TTS et masquage mosaïque.",
+  "group": "Média",
   "actions": {
-    "AudioPlay": {
-      "display_name": "Lire l'audio (AudioPlay)",
-      "description": "播放本地音频文件 (如 MP3、WAV 等)，支持调节音量和循环播放"
-    },
-    "AudioRecord": {
-      "display_name": "Enregistrer l'audio (AudioRecord)",
-      "description": "通过麦克风录制声音并保存为高质量音频文件"
-    },
-    "AudioStop": {
-      "display_name": "Arrêter l'audio (AudioStop)",
-      "description": "立即停止正在播放的背景音乐或提示音"
-    },
-    "CameraClose": {
-      "display_name": "Fermer la caméra (CameraClose)",
-      "description": "关闭已连接的 USB 工业相机或视频流摄像头"
-    },
-    "CameraOpen": {
-      "display_name": "Ouvrir la caméra (CameraOpen)",
-      "description": "打开本地 USB 工业相机、摄像头或网络视频流"
-    },
-    "CaptureActiveWindow": {
-      "display_name": "Capturer fenêtre active (CaptureActiveWindow)",
-      "description": "截取当前最前方的活动软件窗口图像，可保存为文件或复制到剪贴板"
-    },
-    "CaptureRegion": {
-      "display_name": "Capturer zone (CaptureRegion)",
-      "description": "截取屏幕上指定矩形区域的画面图像"
-    },
-    "CaptureScreen": {
-      "display_name": "Capturer l'écran (CaptureScreen)",
-      "description": "截取整张电脑屏幕的画面图像，支持保存为文件或复制到剪贴板"
+    "CaptureImage": {
+      "display_name": "Capturer une image (CaptureImage)",
+      "description": "Capture d'écran universelle pour plein écran, fenêtres actives/spécifique et ROI avec optimisation OCR"
     },
     "CaptureScroll": {
-      "display_name": "Capture avec défilement (CaptureScroll)",
-      "description": "自动模拟向下滚动并无缝拼接成超长网页或聊天记录截图"
+      "display_name": "Capture défilante (CaptureScroll)",
+      "description": "Simule le défilement et réassemble les captures de pages web ou discussions longues"
     },
-    "CaptureWindow": {
-      "display_name": "Capturer fenêtre (CaptureWindow)",
-      "description": "精准截取指定软件窗口的画面，即使窗口被遮挡也能清晰截取"
-    },
-    "MediaInfo": {
-      "display_name": "Infos média (MediaInfo)",
-      "description": "快速查看音视频或图片文件的分辨率、播放时长和文件大小等属性"
-    },
-    "PlayRecord": {
-      "display_name": "Rejouer macro (PlayRecord)",
-      "description": "以指定速度回放之前录制好的鼠标轨迹与键盘击键动作"
+    "CameraCapture": {
+      "display_name": "Capture caméra & flux (CameraCapture)",
+      "description": "Capture de caméra USB et flux RTSP en mode image unique, continu ou fermeture"
     },
     "ScreenRecord": {
-      "display_name": "Enregistrement d'écran (ScreenRecord)",
-      "description": "录制桌面屏幕或指定窗口的操作过程，一键导出为轻量级 GIF 动图"
+      "display_name": "Enregistreur d'écran GIF (ScreenRecord)",
+      "description": "Enregistre l'activité de l'écran ou d'une fenêtre et l'exporte en GIF animé léger"
     },
-    "SystemBeep": {
-      "display_name": "Bip système (SystemBeep)",
-      "description": "发出系统提示音或警报蜂鸣声，用于流程完成或出错时的声音提醒"
+    "VideoRecord": {
+      "display_name": "Enregistreur vidéo HD MP4 (VideoRecord)",
+      "description": "Enregistrement vidéo MP4 haute fréquence avec mixage audio 2 canaux et mémoire tampon circulaire de 30s en cas de crash"
+    },
+    "AudioPlayer": {
+      "display_name": "Lecteur & contrôle audio (AudioPlayer)",
+      "description": "Joue les fichiers audio locaux, gère le volume/boucle, arrête les canaux et émet des bips"
+    },
+    "AudioRecord": {
+      "display_name": "Enregistrement microphone (AudioRecord)",
+      "description": "Capture l'entrée microphone et la sauvegarde au format WAV haute qualité"
+    },
+    "AudioCaptureSystem": {
+      "display_name": "Capture audio système (AudioCaptureSystem)",
+      "description": "Enregistre tous les sons joués par le PC (réunions, lecteur, appels) en WAV sans perte"
     },
     "TextToSpeech": {
       "display_name": "Synthèse vocale (TextToSpeech)",
-      "description": "使用系统自带语音将输入的文字大声朗读播报出来"
+      "description": "Lit le texte saisi à haute voix à l'aide de la voix système hors ligne"
     },
-    "VideoFrame": {
-      "display_name": "Image vidéo (VideoFrame)",
-      "description": "从已打开的工业相机或视频文件中极速抓取当前最新的一帧清晰画面"
+    "SpeechToText": {
+      "display_name": "Reconnaissance vocale ASR (SpeechToText)",
+      "description": "Moteur ASR Hugging Face Candle Pure Rust hors ligne utilisant le modèle Whisper actif pour la transcription"
+    },
+    "AudioExtract": {
+      "display_name": "Extraction audio (AudioExtract)",
+      "description": "Extrait la piste audio des vidéos sans réencodage en quelques millisecondes (MP4 -> MP3/WAV/M4A)"
+    },
+    "MediaWatermark": {
+      "display_name": "Filigrane & Masquage mosaïque (MediaWatermark)",
+      "description": "Superpose des filigranes textuels ou floute/mosaïque les zones sensibles des captures d'écran et vidéos"
+    },
+    "MediaInfo": {
+      "display_name": "Informations média (MediaInfo)",
+      "description": "Détecte la résolution, la durée, les canaux et les métadonnées des fichiers média"
     }
   }
 }
